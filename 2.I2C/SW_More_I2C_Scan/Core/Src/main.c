@@ -30,6 +30,7 @@
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
 static I2C_HANDLE AT24C02_Handle;
+static I2C_HANDLE I2C1_Handle;
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
@@ -54,6 +55,11 @@ uint8_t I2C_Buffer_Read[256];
 #define AT24C02_SCL_Port GPIOB
 #define AT24C02_SDA_Pin GPIO_PIN_7
 #define AT24C02_SCL_Pin GPIO_PIN_6
+#define I2C_SDA_Port	GPIOC
+#define I2C_SCL_Port	GPIOC
+#define I2C_SDA_Pin		GPIO_PIN_11
+#define I2C_SCL_Pin		GPIO_PIN_12
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -108,6 +114,11 @@ int main(void)
 		printf("AT24C02 初始化失败，IIC接口初始化失败！\r\n");
 		return false;
 	}
+	if(I2C_Init(&I2C1_Handle,I2C_SDA_Port,I2C_SCL_Port,I2C_SDA_Pin,I2C_SCL_Pin,1)==false)
+	{
+		printf("I2C1 初始化失败，I2C接口初始化失败！\r\n");
+		return false;
+	}
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -118,30 +129,50 @@ int main(void)
 		uint8_t address,nread;
 		int nDevices = 0;
 		
-		printf("Scanning for I2C devices ...\r\n");
+		printf("I2C0 Scanning for I2C devices ...\r\n");
 		for(address = 0x00 ;address < 0xFF; address++)
 		{
 			I2C_Start(&AT24C02_Handle);
 			I2C_SendByte(&AT24C02_Handle,address);
 			ack = I2C_WaitAck(&AT24C02_Handle);
-			if(ack == 0 && (nDevices %2 == 0))
+			if(ack != false && (nDevices %2 == 0))
 			{
-                printf("I2C device found at write address = 0x%02X\r\n",address);
+                printf("I2C0 device found at write address = 0x%02X\r\n",address);
 				nDevices++;
-				ack=0;
 			}
-			else if(ack == 0 && (nDevices %2 == 1)){
-                printf("I2C device found at read  address = 0x%02X\r\n",address);
+			else if(ack != false && (nDevices %2 == 1)){
+                printf("I2C0 device found at read  address = 0x%02X\r\n",address);
 				nDevices++;
-				ack=0;
 			}
   			I2C_Stop(&AT24C02_Handle);
 		}			
 		if(nDevices == 0)
 		{
-			printf("No I2C devices found\r\n");
+			printf("No I2C0 devices found\r\n");
 		}
 		nDevices = 0;
+		delay_ms(5000);
+		printf("I2C1 Scanning for I2C devices ...\r\n");
+		for(address = 0x00 ;address < 0xFF; address++)
+		{
+			I2C_Start(&I2C1_Handle);
+			I2C_SendByte(&I2C1_Handle,address);
+			ack = I2C_WaitAck(&I2C1_Handle);
+			if(ack != false && (nDevices %2 == 0))
+			{
+                printf("I2C1 device found at write address = 0x%02X\r\n",address);
+				nDevices++;
+			}
+			else if(ack != false && (nDevices %2 == 1)){
+                printf("I2C1 device found at read  address = 0x%02X\r\n",address);
+				nDevices++;
+			}
+  			I2C_Stop(&I2C1_Handle);
+		}			
+		if(nDevices == 0)
+		{
+			printf("No I2C1 devices found\r\n");
+		}
 		delay_ms(5000);
     /* USER CODE END WHILE */
 

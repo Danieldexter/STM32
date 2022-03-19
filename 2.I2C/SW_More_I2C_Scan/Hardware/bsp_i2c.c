@@ -133,11 +133,11 @@ bool I2C_WaitAck(I2C_HANDLE *pHandle)
 		if(ucErrTime>250)
 		{
 			I2C_Stop(pHandle);
-			return 1;
+			return false;
 		}
 	}	
 	SCL_OUT_L(pHandle->SCL_GPIOx, pHandle->SCL_GPIO_BITx);		//SCL=0	  	
-	return 0;  
+	return true;  
 } 
 
 void I2C_Ack(I2C_HANDLE *pHandle)
