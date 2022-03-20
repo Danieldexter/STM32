@@ -4,7 +4,7 @@
 #include "main.h"
 #include "usart.h"
 
-#define BUF_LEN 100
+#define BUF_LEN 30
 
 void usart1_byte_send(unsigned char *p, unsigned char len);
 void usart1_str_send(unsigned char *p);

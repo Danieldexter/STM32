@@ -523,6 +523,21 @@
               <FileType>1</FileType>
               <FilePath>..\Hardware\bsp_uart.c</FilePath>
             </File>
+            <File>
+              <FileName>hoto_flash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Hardware\hoto_flash.c</FilePath>
+            </File>
+            <File>
+              <FileName>hoto_modbus.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Hardware\hoto_modbus.c</FilePath>
+            </File>
+            <File>
+              <FileName>crc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Hardware\crc.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

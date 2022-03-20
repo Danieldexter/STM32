@@ -19,6 +19,10 @@ extern uint8_t RevSta;
 #define u16 uint16_t
 #define u32 uint32_t
 
+typedef volatile unsigned long  vu32;
+typedef volatile unsigned short vu16;
+typedef volatile unsigned char  vu8;
+
 #define LED0_ON 	HAL_GPIO_WritePin(LED0_GPIO_Port, LED0_Pin, GPIO_PIN_RESET)
 #define LED0_OFF 	HAL_GPIO_WritePin(LED0_GPIO_Port, LED0_Pin, GPIO_PIN_SET)
 

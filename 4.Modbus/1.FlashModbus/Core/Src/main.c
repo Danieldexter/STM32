@@ -24,7 +24,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "hoto_modbus.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -74,7 +74,8 @@ int main(void)
     HAL_Init();
 
     /* USER CODE BEGIN Init */
-
+	Modbus_Init();
+	HOTO_Flash_Init();
     /* USER CODE END Init */
 
     /* Configure the system clock */
@@ -89,26 +90,29 @@ int main(void)
     MX_USART1_UART_Init();
     /* USER CODE BEGIN 2 */
 	__HAL_UART_ENABLE_IT(&huart1,UART_IT_RXNE);  
-	__HAL_UART_ENABLE_IT(&huart1,UART_IT_IDLE);  	
+	__HAL_UART_ENABLE_IT(&huart1,UART_IT_IDLE); 
+	LED0_ON;	
+	LED1_ON;
     /* USER CODE END 2 */
 
     /* Infinite loop */
     /* USER CODE BEGIN WHILE */
     while (1)
     {
-		LED0_ON;
-		LED1_OFF;
-		delay_ms(500);
-		LED0_OFF;
-		LED1_ON;
-		delay_ms(500);
-		DEBUG("OK!\r\n");
-		if(rxtail != rxhead)
-		{
-			usart1_str_send(rxbuf[rxtail].rxmsg);
-			if(++rxtail >= 10)
-				rxtail = 0;
-		}
+		Modbus_Even();
+//		
+//		LED1_OFF;
+//		delay_ms(500);
+//		LED0_OFF;
+//		
+//		delay_ms(500);
+//		DEBUG("OK!\r\n");
+//		if(rxtail != rxhead)
+//		{
+//			usart1_str_send(rxbuf[rxtail].rxmsg);
+//			if(++rxtail >= 10)
+//				rxtail = 0;
+//		}
         /* USER CODE END WHILE */
         /* USER CODE BEGIN 3 */
     }
