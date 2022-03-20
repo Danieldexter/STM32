@@ -102,6 +102,7 @@ int main(void)
 		LED0_OFF;
 		LED1_ON;
 		delay_ms(500);
+		DEBUG("OK!\r\n");
 		if(rxtail != rxhead)
 		{
 			usart1_str_send(rxbuf[rxtail].rxmsg);

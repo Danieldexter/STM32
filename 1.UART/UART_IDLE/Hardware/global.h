@@ -7,6 +7,14 @@ extern uint8_t rxhead;
 extern uint8_t rxtail;
 extern uint8_t RevSta;
 
+#define __DEBUG__ 
+ 
+#ifdef __DEBUG__
+#define DEBUG(format,...) printf("File: "__FILE__", Line: %05d: "format"\n", __LINE__, ##__VA_ARGS__)
+#else
+#define DEBUG(format,...)
+#endif
+
 #define u8 uint8_t
 #define u16 uint16_t
 #define u32 uint32_t
