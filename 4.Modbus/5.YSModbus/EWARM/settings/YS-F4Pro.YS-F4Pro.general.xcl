@@ -1,0 +1,15 @@
+"F:\arm\bin\armproc.dll" 
+
+"F:\arm\bin\armstlink2.dll" 
+
+"H:\常用F4与F1程序资料\3. STM32F4程序资料\09. Modbus例程\YSF4_HAL_Modbus_002. 基于Modbus主从机例程\基于RS232&RS485的Modbus从机例程\EWARM\YS-F4Pro\Exe\YS-F4Pro.out" 
+
+--plugin "F:\arm\bin\armbat.dll" 
+
+--device_macro "F:\arm\config\debugger\ST\STM32F4xx.dmac" 
+
+--flash_loader "F:\arm\config\flashloader\ST\FlashSTM32F4xxx.board" 
+
+
+
+
